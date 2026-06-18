@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YT Timestamps</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="4" width="20" height="16" rx="3" fill="#FF0000"/>
+          <polygon points="10,8 17,12 10,16" fill="white"/>
+        </svg>
+        <span class="logo-text">YT Timestamps</span>
+      </div>
+      <button class="icon-btn" id="refreshBtn" title="Refresh">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M23 4v6h-6M1 20v-6h6"/>
+          <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Current video section -->
+    <section class="section" id="currentSection" style="display:none">
+      <div class="section-label">NOW WATCHING</div>
+      <div class="current-video-card" id="currentVideoCard">
+        <div class="current-video-info">
+          <div class="current-video-title" id="currentTitle">—</div>
+          <div class="current-video-time" id="currentTime">0:00</div>
+        </div>
+        <button class="add-btn" id="addTimestampBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          Add Timestamp
+        </button>
+      </div>
+    </section>
+
+    <!-- Not on YouTube notice -->
+    <div class="not-on-yt" id="notOnYt" style="display:none">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <p>Open a YouTube video<br/>to add timestamps</p>
+    </div>
+
+    <!-- Bookmarked videos -->
+    <section class="section">
+      <div class="section-label">BOOKMARKED VIDEOS</div>
+
+      <div class="empty-state" id="emptyState">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.25">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+        </svg>
+        <p>No bookmarks yet.<br/>Visit a YouTube video and add a timestamp.</p>
+      </div>
+
+      <div id="videoListWrapper" style="display:none">
+        <div class="custom-select" id="videoSelectWrapper">
+          <button class="select-btn" id="videoSelectBtn">
+            <span class="select-value" id="videoSelectValue">Select a video…</span>
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="select-dropdown" id="videoDropdown"></div>
+        </div>
+
+        <!-- Timestamps for selected video -->
+        <div id="timestampSection" style="display:none">
+          <div class="ts-header">
+            <div class="section-label" style="margin:0">TIMESTAMPS</div>
+            <button class="open-video-btn" id="openVideoBtn">
+              Open video
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="custom-select" id="tsSelectWrapper">
+            <button class="select-btn" id="tsSelectBtn">
+              <span class="select-value" id="tsSelectValue">Jump to timestamp…</span>
+              <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <div class="select-dropdown" id="tsDropdown"></div>
+          </div>
+
+          <div class="timestamp-list" id="timestampList"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
